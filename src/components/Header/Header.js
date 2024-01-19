@@ -137,7 +137,7 @@ const Link = styled.a`
   color: var(--color-gray-900);
   font-size: 0.875rem;
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   line-height: 1.375rem;
   text-decoration: underline;
     
