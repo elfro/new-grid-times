@@ -112,6 +112,11 @@ const OpinionSection = styled.section`
 
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
+
+
+  @media ${QUERIES.tabletOnly} {
+      margin-top: 32px;
+  }    
 `;
 
 export default MainStoryGrid;
