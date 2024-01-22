@@ -24,7 +24,9 @@ const MainStoryGrid = () => {
       <SecondaryStorySection>
         <StoryList>
           {SECONDARY_STORIES.map((story, index) => (
-            <SecondaryStory key={story.id} {...story} />
+            <StoryWrapper key={story.id}>
+              <SecondaryStory {...story} />
+            </StoryWrapper>
           ))}
         </StoryList>
       </SecondaryStorySection>
@@ -33,7 +35,9 @@ const MainStoryGrid = () => {
         <SectionTitle>Opinion</SectionTitle>
         <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
+            <OpinionStoryWrapper  key={story.id}>
+              <OpinionStory {...story} />
+            </OpinionStoryWrapper>
           ))}
         </OpinionStoryList>
       </OpinionSection>
@@ -60,8 +64,7 @@ const Wrapper = styled.div`
         'main-story secondary-stories'
         'advertisement advertisement'
         'opinion-stories opinion-stories';
-      
-      grid-template-columns: auto 250px;
+      grid-template-columns: 2fr 1fr;
       gap: 16px;
   }
 
@@ -69,7 +72,7 @@ const Wrapper = styled.div`
       grid-template-areas:
       'main-story secondary-stories opinion-stories'
       'main-story advertisement advertisement';
-      grid-template-columns: auto 390px 275px;
+      grid-template-columns: 5fr 4fr 3fr;
   }
 `;
 
@@ -99,15 +102,34 @@ const StoryList = styled.div`
 
 const OpinionStoryList = styled(StoryList)`
   @media ${QUERIES.tabletOnly} {
-      display: grid;
-      grid-auto-flow: column;
-      grid-template-columns: repeat(4, minmax(50px, 100%));
+      flex-direction: row;
       gap: 32px;
+  }
+`;
+
+const StoryWrapper = styled.div`
+  &:not(:first-of-type) {
+      border-top: 1px solid var(--color-gray-300);
+      padding-top: 16px;
+  }
+`;
+
+const OpinionStoryWrapper = styled(StoryWrapper)`
+  @media ${QUERIES.tabletOnly} {
+      flex: 1;
+      &:not(:first-of-type) {
+          border-top: revert;
+          padding: revert;
+      }
   }
 `;
 
 const OpinionSection = styled.section`
   grid-area: opinion-stories;
+
+  @media ${QUERIES.laptopAndUp} {
+    margin-top: -8px
+  }
 `;
 
 const AdvertisementSection = styled.section`
