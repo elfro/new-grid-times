@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import MaxWidthWrapper from '../MaxWidthWrapper';
 
 import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES } from '../../constants';
 
 const Footer = () => {
   return (
@@ -13,29 +14,29 @@ const Footer = () => {
           <nav>
             <TopNavList>
               <li>
-                <a href="/about">About</a>
+                <SocialLink href="/about">About</SocialLink>
               </li>
               <li>
-                <a href="/press">Press Releases</a>
+                <SocialLink href="/press">Press Releases</SocialLink>
               </li>
               <li>
-                <a href="/contact">Contact Us</a>
+                <SocialLink href="/contact">Contact Us</SocialLink>
               </li>
             </TopNavList>
           </nav>
           <Social>
-            <a href="/">
+            <SocialLink href="/">
               <VisuallyHidden>
                 Visit The Grid Times on Facebook
               </VisuallyHidden>
               <Facebook size={20} />
-            </a>
-            <a href="/">
+            </SocialLink>
+            <SocialLink href="/">
               <VisuallyHidden>
                 Visit The Grid Times on Twitter
               </VisuallyHidden>
               <Twitter size={20} />
-            </a>
+            </SocialLink>
           </Social>
         </TopRow>
         <MainNavArea>
@@ -143,12 +144,24 @@ const TopRow = styled.div`
   color: var(--color-gray-300);
   font-size: 0.875rem;
   border-bottom: 1px solid var(--color-gray-700);
-  padding: 24px 0;
+  padding-top: 24px;
+  padding-bottom: 12px;
+    
+
+  @media ${QUERIES.tabletAndUp} {
+    flex-direction: row;
+    justify-content: center;
+    gap: 48px;
+    padding: 12px 0;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    justify-content: flex-end;
+  }
 `;
 
 const Social = styled.div`
   display: flex;
-  gap: 24px;
 
   svg {
     display: block;
@@ -159,9 +172,12 @@ const Social = styled.div`
   }
 `;
 
+const SocialLink = styled.a`
+  padding: 12px;
+`;
+
 const TopNavList = styled.ul`
   display: flex;
-  gap: 16px;
 `;
 
 const MainNavArea = styled.div`
@@ -170,6 +186,13 @@ const MainNavArea = styled.div`
   gap: 32px;
   padding: 32px 0 48px;
   text-align: center;
+  
+  @media ${QUERIES.tabletAndUp} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    align-items: start;
+    text-align: revert;
+  }  
 `;
 
 const MainNavHeading = styled.h2`
@@ -196,6 +219,10 @@ const Subfooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${QUERIES.laptopAndUp} {
+    align-items: flex-start;
+  }
 `;
 
 const Logo = styled.a`
