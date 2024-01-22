@@ -9,6 +9,10 @@ const Button = styled.button`
   color: var(--color-white);
   background: var(--color-primary);
   border-radius: 4px;
+  
+  &:hover {
+    opacity: 0.8;
+  }  
 `;
 
 export default Button;

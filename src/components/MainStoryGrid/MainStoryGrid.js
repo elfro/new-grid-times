@@ -12,6 +12,7 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import { QUERIES } from '../../constants';
 
 const MainStoryGrid = () => {
   return (
@@ -30,11 +31,11 @@ const MainStoryGrid = () => {
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
             <OpinionStory key={story.id} {...story} />
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -53,19 +54,56 @@ const Wrapper = styled.div`
     'advertisement';
   gap: 48px;
   margin-bottom: 48px;
+    
+  @media ${QUERIES.tabletAndUp} {  
+      grid-template-areas:
+        'main-story secondary-stories'
+        'advertisement advertisement'
+        'opinion-stories opinion-stories';
+      
+      grid-template-columns: auto 250px;
+      gap: 16px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+      grid-template-areas:
+      'main-story secondary-stories opinion-stories'
+      'main-story advertisement advertisement';
+      grid-template-columns: auto 390px 275px;
+  }
 `;
 
 const MainStorySection = styled.section`
   grid-area: main-story;
+
+  @media ${QUERIES.tabletAndUp} {
+      padding-right: 16px;
+      border-right: 1px solid var(--color-gray-300);
+  }  
 `;
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
+
+  @media ${QUERIES.laptopAndUp} {
+      padding-right: 16px;
+      border-right: 1px solid var(--color-gray-300);
+  }
 `;
 
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 16px;
+`;
+
+const OpinionStoryList = styled(StoryList)`
+  @media ${QUERIES.tabletOnly} {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: repeat(4, minmax(50px, 100%));
+      gap: 32px;
+  }
 `;
 
 const OpinionSection = styled.section`
@@ -74,6 +112,11 @@ const OpinionSection = styled.section`
 
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
+
+
+  @media ${QUERIES.tabletOnly} {
+      margin-top: 32px;
+  }    
 `;
 
 export default MainStoryGrid;
