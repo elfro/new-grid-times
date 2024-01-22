@@ -191,7 +191,7 @@ const MainNavArea = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     align-items: start;
-    text-align: revert;
+    text-align: left;
   }  
 `;
 
